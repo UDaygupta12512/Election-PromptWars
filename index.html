@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElectoGuide — Your Interactive Election Process Assistant</title>
+    <meta name="description" content="Understand the complete election process with ElectoGuide. Interactive timelines, step-by-step guides, FAQs, quizzes, and a Gemini AI chatbot to answer all your election questions.">
+    <meta name="keywords" content="election process, voting guide, election timeline, how to vote, election assistant, democracy, election quiz">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress-bar" id="scrollProgressBar"></div>
+
+    <!-- Animated Background Particles -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Navigation -->
+    <nav id="mainNav" class="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo" id="navLogo">
+                <span class="logo-icon">🗳️</span>
+                <span class="logo-text">Electo<span class="logo-accent">Guide</span></span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <div class="nav-lang-picker">
+                    <select id="langSelect" class="lang-select">
+                        <option value="en">English</option>
+                        <option value="es">Español</option>
+                        <option value="hi">हिन्दी</option>
+                    </select>
+                </div>
+                <a href="#overview" class="nav-link" id="navOverview">Overview</a>
+                <a href="#timeline" class="nav-link" id="navTimeline">Timeline</a>
+                <a href="#steps" class="nav-link" id="navSteps">Steps</a>
+                <a href="#arena" class="nav-link" id="navArena">Arena</a>
+                <a href="#quiz" class="nav-link" id="navQuiz">Quiz</a>
+                <a href="#checklist" class="nav-link" id="navChecklist">Checklist</a>
+                <a href="#faq" class="nav-link" id="navFAQ">FAQ</a>
+                <a href="#assistant" class="nav-link nav-link-cta" id="navAssistant">
+                    <span class="cta-pulse"></span>
+                    Ask AI
+                </a>
+            </div>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="hero" class="hero">
+        <div class="hero-content">
+            <div class="hero-badge" id="heroBadge">
+                <span class="badge-dot"></span>
+                Powered by Gemini AI
+            </div>
+            <h1 class="hero-title" id="heroTitle">
+                Understand the <span class="gradient-text">Election Process</span> Like Never Before
+            </h1>
+            <p class="hero-subtitle" id="heroSubtitle">
+                Navigate every step of the democratic process with our interactive guide. 
+                From registration to results — powered by AI, built for you.
+            </p>
+            <div class="hero-countdown" id="heroCountdown">
+                <h3 class="countdown-title">Next General Election</h3>
+                <div class="countdown-timer">
+                    <div class="countdown-part">
+                        <span id="countDays" class="countdown-val">00</span>
+                        <span class="countdown-label">Days</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-part">
+                        <span id="countHours" class="countdown-val">00</span>
+                        <span class="countdown-label">Hours</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-part">
+                        <span id="countMinutes" class="countdown-val">00</span>
+                        <span class="countdown-label">Mins</span>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-part">
+                        <span id="countSeconds" class="countdown-val">00</span>
+                        <span class="countdown-label">Secs</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-actions" id="heroActions">
+                <a href="#timeline" class="btn btn-primary" id="btnExplore">
+                    <span>Explore Timeline</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
+                <a href="#assistant" class="btn btn-secondary" id="btnAskAssistant">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>Ask Gemini AI</span>
+                </a>
+                <a href="#quiz" class="btn btn-accent" id="btnTakeQuiz">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span>Take Quiz</span>
+                </a>
+            </div>
+            <div class="hero-stats" id="heroStats">
+                <div class="stat-item">
+                    <span class="stat-number" data-count="7">0</span>
+                    <span class="stat-label">Key Phases</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="15">0</span>
+                    <span class="stat-label">Detailed Steps</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-number" data-count="50">0</span>
+                    <span class="stat-label">FAQs Answered</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual" id="heroVisual">
+            <div class="hero-image-wrapper">
+                <img src="hero-banner.png" alt="Election Process Illustration" class="hero-image" id="heroImage">
+                <div class="hero-glow"></div>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator" id="scrollIndicator">
+            <span>Scroll to explore</span>
+            <div class="scroll-arrow">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section id="overview" class="section overview-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="overviewTag">Understanding Democracy</span>
+                <h2 class="section-title" id="overviewTitle">The Election <span class="gradient-text">Ecosystem</span></h2>
+                <p class="section-desc" id="overviewDesc">Elections are the cornerstone of democracy. Here's a bird's-eye view of how the entire process works, from preparation to proclamation.</p>
+            </div>
+            <div class="overview-grid" id="overviewGrid">
+                <div class="overview-card" data-delay="0" id="cardPreparation">
+                    <div class="card-icon-wrap" style="--card-color: #7c3aed;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    </div>
+                    <h3>Preparation</h3>
+                    <p>Setting up the electoral framework, delimiting constituencies, and establishing election infrastructure.</p>
+                    <span class="card-number">01</span>
+                </div>
+                <div class="overview-card" data-delay="100" id="cardRegistration">
+                    <div class="card-icon-wrap" style="--card-color: #06b6d4;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                    </div>
+                    <h3>Registration</h3>
+                    <p>Voter registration drives, updating electoral rolls, and ensuring every eligible citizen can participate.</p>
+                    <span class="card-number">02</span>
+                </div>
+                <div class="overview-card" data-delay="200" id="cardNomination">
+                    <div class="card-icon-wrap" style="--card-color: #f59e0b;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Nomination</h3>
+                    <p>Candidates file nominations, undergo scrutiny, and the final list of contestants is published.</p>
+                    <span class="card-number">03</span>
+                </div>
+                <div class="overview-card" data-delay="300" id="cardCampaigning">
+                    <div class="card-icon-wrap" style="--card-color: #ec4899;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    </div>
+                    <h3>Campaigning</h3>
+                    <p>Political parties and candidates campaign, debate, and present their manifestos to the electorate.</p>
+                    <span class="card-number">04</span>
+                </div>
+                <div class="overview-card" data-delay="400" id="cardVoting">
+                    <div class="card-icon-wrap" style="--card-color: #10b981;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                    </div>
+                    <h3>Voting Day</h3>
+                    <p>Citizens cast their ballots at designated polling stations using secure and verified methods.</p>
+                    <span class="card-number">05</span>
+                </div>
+                <div class="overview-card" data-delay="500" id="cardCounting">
+                    <div class="card-icon-wrap" style="--card-color: #8b5cf6;">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                    </div>
+                    <h3>Counting</h3>
+                    <p>Votes are tallied under strict supervision, with transparency measures ensuring accuracy and fairness.</p>
+                    <span class="card-number">06</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Democracy Stats Section -->
+    <section id="democracyStats" class="section stats-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="statsTag">Democracy in Numbers</span>
+                <h2 class="section-title" id="statsTitle">Global <span class="gradient-text">Election Facts</span></h2>
+                <p class="section-desc" id="statsDesc">Fascinating numbers that showcase the scale and importance of democratic processes worldwide.</p>
+            </div>
+            <div class="stats-grid" id="statsGrid">
+                <div class="stats-card" id="statCard1">
+                    <div class="stats-icon">🌍</div>
+                    <div class="stats-value" data-count="195">0</div>
+                    <div class="stats-label">Countries with Elections</div>
+                    <div class="stats-bar"><div class="stats-bar-fill" style="--fill-width: 85%;"></div></div>
+                </div>
+                <div class="stats-card" id="statCard2">
+                    <div class="stats-icon">👥</div>
+                    <div class="stats-value" data-count="2">0</div>
+                    <div class="stats-suffix">B+</div>
+                    <div class="stats-label">Eligible Voters Worldwide</div>
+                    <div class="stats-bar"><div class="stats-bar-fill" style="--fill-width: 70%;"></div></div>
+                </div>
+                <div class="stats-card" id="statCard3">
+                    <div class="stats-icon">🗳️</div>
+                    <div class="stats-value" data-count="900">0</div>
+                    <div class="stats-suffix">M+</div>
+                    <div class="stats-label">Voters in India (Largest)</div>
+                    <div class="stats-bar"><div class="stats-bar-fill" style="--fill-width: 95%;"></div></div>
+                </div>
+                <div class="stats-card" id="statCard4">
+                    <div class="stats-icon">📊</div>
+                    <div class="stats-value" data-count="66">0</div>
+                    <div class="stats-suffix">%</div>
+                    <div class="stats-label">Global Average Voter Turnout</div>
+                    <div class="stats-bar"><div class="stats-bar-fill" style="--fill-width: 66%;"></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Timeline Section -->
+    <section id="timeline" class="section timeline-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="timelineTag">Phase by Phase</span>
+                <h2 class="section-title" id="timelineTitle">Election <span class="gradient-text">Timeline</span></h2>
+                <p class="section-desc" id="timelineDesc">Follow the election journey from announcement to results. Click on any phase to learn more about its significance and key activities.</p>
+            </div>
+            <div class="timeline" id="timelineContainer">
+                <div class="timeline-track">
+                    <div class="timeline-progress" id="timelineProgress"></div>
+                </div>
+            </div>
+            <div class="timeline-detail-panel" id="timelineDetailPanel">
+                <div class="detail-panel-content" id="detailPanelContent">
+                    <p class="detail-hint">👆 Click on a timeline phase above to see detailed information</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step-by-Step Voting Guide -->
+    <section id="steps" class="section steps-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="stepsTag">Your Voting Journey</span>
+                <h2 class="section-title" id="stepsTitle">How to <span class="gradient-text">Cast Your Vote</span></h2>
+                <p class="section-desc" id="stepsDesc">A complete step-by-step guide to help you navigate the voting process on election day. Be prepared, be informed, be heard.</p>
+            </div>
+            <div class="steps-container" id="stepsContainer">
+                <!-- Steps will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Candidate Arena Section -->
+    <section id="arena" class="section arena-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="arenaTag">Candidate Comparison</span>
+                <h2 class="section-title" id="arenaTitle">The <span class="gradient-text">Candidate Arena</span></h2>
+                <p class="section-desc" id="arenaDesc">Compare the leading candidates or parties side-by-side. Understand their visions, track records, and key policy proposals to make an informed choice.</p>
+            </div>
+            <div class="arena-filter" id="arenaFilter">
+                <button class="filter-btn active" data-filter="all">All Candidates</button>
+                <button class="filter-btn" data-filter="progressive">Progressive</button>
+                <button class="filter-btn" data-filter="conservative">Conservative</button>
+                <button class="filter-btn" data-filter="independent">Independent</button>
+            </div>
+            <div class="arena-grid" id="arenaGrid">
+                <!-- Candidate cards will be generated by JavaScript -->
+            </div>
+            <div class="arena-compare-bar" id="arenaCompareBar" style="display: none;">
+                <div class="compare-info">
+                    <span id="compareCount">0</span> candidates selected for comparison
+                </div>
+                <button class="btn btn-primary" id="btnLaunchCompare">Compare Selected</button>
+            </div>
+        </div>
+
+        <!-- Comparison Modal -->
+        <div class="modal" id="compareModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeCompareModal">&times;</button>
+                <h2 class="modal-title">Candidate <span class="gradient-text">Side-by-Side</span></h2>
+                <div class="compare-table-container">
+                    <table class="compare-table" id="compareTable">
+                        <!-- Comparison table generated by JS -->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Find My Booth Simulation Section -->
+    <section id="findBooth" class="section booth-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Locate Your Spot</span>
+                <h2 class="section-title">Find Your <span class="gradient-text">Polling Station</span></h2>
+                <p class="section-desc">Quickly find where you need to go on election day. Enter your region or postal code to locate your assigned booth.</p>
+            </div>
+            <div class="booth-container">
+                <div class="booth-search-card">
+                    <div class="search-input-group">
+                        <input type="text" id="boothSearch" placeholder="Enter Zip Code or Area (e.g. 10001, Manhattan)" class="form-input">
+                        <button class="btn btn-primary" id="btnFindBooth">Search Booth</button>
+                    </div>
+                    <div class="booth-results" id="boothResults" style="display: none;">
+                        <div class="booth-info-card">
+                            <div class="booth-map-mock">
+                                <div class="map-pin">📍</div>
+                                <div class="map-pulse"></div>
+                            </div>
+                            <div class="booth-details">
+                                <h4 id="boothName">Central High School Gym</h4>
+                                <p id="boothAddress">123 Democracy Way, District 4</p>
+                                <div class="booth-meta">
+                                    <span>🕒 7:00 AM - 8:00 PM</span>
+                                    <span>🚶 5 min walk from station</span>
+                                </div>
+                                <button class="btn btn-secondary btn-sm" id="btnDirections">Get Directions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Election Knowledge Quiz -->
+    <section id="quiz" class="section quiz-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="quizTag">Test Yourself</span>
+                <h2 class="section-title" id="quizTitle">Election <span class="gradient-text">Knowledge Quiz</span></h2>
+                <p class="section-desc" id="quizDesc">Think you know the election process? Put your knowledge to the test with our interactive quiz!</p>
+            </div>
+            <div class="quiz-container" id="quizContainer">
+                <div class="quiz-card" id="quizCard">
+                    <div class="quiz-header" id="quizHeader">
+                        <div class="quiz-progress-info">
+                            <span id="quizQuestionNum">Question 1 of 10</span>
+                            <span id="quizScore" class="quiz-score-display">Score: 0</span>
+                        </div>
+                        <div class="quiz-progress-track">
+                            <div class="quiz-progress-fill" id="quizProgressFill"></div>
+                        </div>
+                    </div>
+                    <div class="quiz-body" id="quizBody">
+                        <h3 class="quiz-question" id="quizQuestion"></h3>
+                        <div class="quiz-options" id="quizOptions">
+                            <!-- Options generated by JS -->
+                        </div>
+                    </div>
+                    <div class="quiz-footer" id="quizFooter">
+                        <div class="quiz-feedback" id="quizFeedback"></div>
+                        <button class="btn btn-primary quiz-next-btn" id="quizNextBtn" style="display:none;">
+                            <span>Next Question</span>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                        </button>
+                    </div>
+                </div>
+                <!-- Quiz results overlay -->
+                <div class="quiz-results" id="quizResults" style="display:none;">
+                    <div class="quiz-results-card">
+                        <div class="quiz-results-icon" id="quizResultsIcon">🏆</div>
+                        <h3 class="quiz-results-title" id="quizResultsTitle">Great Job!</h3>
+                        <p class="quiz-results-score" id="quizResultsScore"></p>
+                        <div class="quiz-results-message" id="quizResultsMessage"></div>
+                        <button class="btn btn-primary" id="quizRetryBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                            <span>Try Again</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Document & Eligibility Checker -->
+    <section id="eligibility" class="section eligibility-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Check Your Status</span>
+                <h2 class="section-title">Eligibility & <span class="gradient-text">Document Checker</span></h2>
+                <p class="section-desc">Not sure if you can vote? Use our quick assessment tool to find out your eligibility and what documents you need.</p>
+            </div>
+            <div class="eligibility-container" id="eligibilityContainer">
+                <form class="eligibility-form" id="eligibilityForm">
+                    <div class="form-group">
+                        <label for="eligAge">What is your age?</label>
+                        <input type="number" id="eligAge" min="0" max="150" placeholder="e.g. 18" required class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="eligCitizen">Are you a citizen of the country?</label>
+                        <select id="eligCitizen" class="form-input" required>
+                            <option value="">Select option</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Which primary ID documents do you currently have? (Select all that apply)</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label"><input type="checkbox" name="docs" value="Voter ID" id="docVoterId"> Voter ID Card</label>
+                            <label class="checkbox-label"><input type="checkbox" name="docs" value="Passport"> Passport</label>
+                            <label class="checkbox-label"><input type="checkbox" name="docs" value="Driving License"> Driving License</label>
+                            <label class="checkbox-label"><input type="checkbox" name="docs" value="National ID"> National ID (e.g. Aadhar/SSN)</label>
+                            <label class="checkbox-label"><input type="checkbox" id="docNone" value="None"> None of the above</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="btnCheckEligibility">
+                        <span>Check Status</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    </button>
+                </form>
+                
+                <div class="eligibility-result" id="eligibilityResult" style="display: none;">
+                    <div class="result-icon-wrap" id="resultIconWrap">
+                        <!-- Icon injected by JS -->
+                    </div>
+                    <h3 class="result-title" id="resultTitle">Result</h3>
+                    <p class="result-message" id="resultMessage">Message goes here</p>
+                    <div class="result-missing" id="resultMissing"></div>
+                    <button class="btn btn-secondary" id="btnResetEligibility" style="margin-top: 20px;">Check Another</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Voter Readiness Checklist -->
+    <section id="checklist" class="section checklist-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="checklistTag">Be Prepared</span>
+                <h2 class="section-title" id="checklistTitle">Voter Readiness <span class="gradient-text">Checklist</span></h2>
+                <p class="section-desc" id="checklistDesc">Make sure you're fully prepared for election day. Check off each item as you complete it!</p>
+            </div>
+            <div class="checklist-container" id="checklistContainer">
+                <div class="checklist-progress-ring" id="checklistProgressRing">
+                    <svg viewBox="0 0 120 120" class="progress-svg">
+                        <circle class="progress-bg" cx="60" cy="60" r="54"/>
+                        <circle class="progress-fill" cx="60" cy="60" r="54" id="checklistCircle"/>
+                    </svg>
+                    <div class="progress-text" id="checklistPercentage">0%</div>
+                </div>
+                <div class="checklist-items" id="checklistItems">
+                    <!-- Generated by JS -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section faq-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="faqTag">Got Questions?</span>
+                <h2 class="section-title" id="faqTitle">Frequently Asked <span class="gradient-text">Questions</span></h2>
+                <p class="section-desc" id="faqDesc">Find answers to the most common questions about the election process, voter eligibility, and more.</p>
+            </div>
+            <div class="faq-categories" id="faqCategories">
+                <button class="faq-cat-btn active" data-category="all" id="faqCatAll">All</button>
+                <button class="faq-cat-btn" data-category="eligibility" id="faqCatEligibility">Eligibility</button>
+                <button class="faq-cat-btn" data-category="process" id="faqCatProcess">Process</button>
+                <button class="faq-cat-btn" data-category="rules" id="faqCatRules">Rules</button>
+                <button class="faq-cat-btn" data-category="results" id="faqCatResults">Results</button>
+            </div>
+            <div class="faq-list" id="faqList">
+                <!-- FAQ items will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Voter's Pulse Section (Live Poll Simulation) -->
+    <section id="pulse" class="section pulse-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Public Sentiment</span>
+                <h2 class="section-title">The <span class="gradient-text">Voter's Pulse</span></h2>
+                <p class="section-desc">Participate in our real-time mock poll on critical democratic issues. See how your views compare with other citizens in our community.</p>
+            </div>
+            <div class="pulse-container">
+                <div class="pulse-poll-card">
+                    <h3 class="poll-question">Which issue should be the top priority for the next government?</h3>
+                    <div class="poll-options" id="pollOptions">
+                        <button class="poll-option-btn" data-id="1">
+                            <span class="option-label">Economy & Jobs</span>
+                            <span class="option-percent">0%</span>
+                            <div class="option-bar"><div class="bar-fill"></div></div>
+                        </button>
+                        <button class="poll-option-btn" data-id="2">
+                            <span class="option-label">Healthcare Access</span>
+                            <span class="option-percent">0%</span>
+                            <div class="option-bar"><div class="bar-fill"></div></div>
+                        </button>
+                        <button class="poll-option-btn" data-id="3">
+                            <span class="option-label">Climate Action</span>
+                            <span class="option-percent">0%</span>
+                            <div class="option-bar"><div class="bar-fill"></div></div>
+                        </button>
+                        <button class="poll-option-btn" data-id="4">
+                            <span class="option-label">Education Reform</span>
+                            <span class="option-percent">0%</span>
+                            <div class="option-bar"><div class="bar-fill"></div></div>
+                        </button>
+                    </div>
+                    <div class="poll-meta">
+                        <span id="totalVotes">Total Votes: 1,248</span>
+                        <span>•</span>
+                        <span>Next poll starts in 2 days</span>
+                    </div>
+                </div>
+                <div class="pulse-insights">
+                    <div class="insight-card">
+                        <div class="insight-icon">📈</div>
+                        <h4>Trend Analysis</h4>
+                        <p>Interest in <strong>Climate Action</strong> has increased by 15% among young voters (18-25) compared to the previous quarter.</p>
+                    </div>
+                    <div class="insight-card">
+                        <div class="insight-icon">💬</div>
+                        <h4>Community Discussion</h4>
+                        <p>Most discussions currently focus on the balance between <strong>Economy</strong> and <strong>Sustainable Growth</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant / Chatbot Section -->
+    <section id="assistant" class="section assistant-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag" id="assistantTag">Gemini AI Powered</span>
+                <h2 class="section-title" id="assistantTitle">Ask <span class="gradient-text">ElectoBot</span></h2>
+                <p class="section-desc" id="assistantDesc">Have a specific question about elections? Our Gemini AI-powered assistant is here to help you understand any aspect of the electoral process.</p>
+            </div>
+            <div class="chat-container" id="chatContainer">
+                <div class="chat-window" id="chatWindow">
+                    <div class="chat-header-bar">
+                        <div class="chat-header-left">
+                            <div class="chat-status-dot"></div>
+                            <span>ElectoBot — <em>Gemini AI</em></span>
+                        </div>
+                        <button class="chat-clear-btn" id="chatClearBtn" title="Clear chat">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                        </button>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="chat-message bot-message" id="welcomeMessage">
+                            <div class="message-avatar">🤖</div>
+                            <div class="message-content">
+                                <p>Hello! I'm <strong>ElectoBot</strong>, powered by <strong>Gemini AI</strong>. I can answer any question about elections, voting, and democratic processes worldwide. Ask me anything!</p>
+                                <ul>
+                                    <li>🗳️ How elections work in any country</li>
+                                    <li>📝 Voter registration & requirements</li>
+                                    <li>📅 Election timelines and phases</li>
+                                    <li>⚖️ Electoral laws and regulations</li>
+                                    <li>🔢 Counting, results & government formation</li>
+                                    <li>🌍 Comparison of electoral systems</li>
+                                </ul>
+                                <p>Try asking me a question, or pick a suggestion below!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-suggestions" id="chatSuggestions">
+                        <button class="suggestion-chip" id="suggestRegister">How do I register to vote?</button>
+                        <button class="suggestion-chip" id="suggestId">What ID do I need to vote?</button>
+                        <button class="suggestion-chip" id="suggestCompare">Compare FPTP vs Proportional Representation</button>
+                        <button class="suggestion-chip" id="suggestResults">How are election results declared?</button>
+                        <button class="suggestion-chip" id="suggestEVM">How do EVMs work?</button>
+                    </div>
+                    <div class="chat-quick-actions" id="chatQuickActions">
+                        <button class="quick-action-btn" data-query="Explain the First-Past-The-Post system">
+                            <span class="action-icon">🗳️</span>
+                            <span>Explain FPTP</span>
+                        </button>
+                        <button class="quick-action-btn" data-query="What is the Model Code of Conduct?">
+                            <span class="action-icon">📜</span>
+                            <span>Code of Conduct</span>
+                        </button>
+                        <button class="quick-action-btn" data-query="How does voter registration work in my country?">
+                            <span class="action-icon">📝</span>
+                            <span>Registration Help</span>
+                        </button>
+                        <button class="quick-action-btn" data-query="Tell me about Electronic Voting Machines (EVMs)">
+                            <span class="action-icon">🤖</span>
+                            <span>EVM Guide</span>
+                        </button>
+                    </div>
+                    <div class="chat-input-area" id="chatInputArea">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="Ask me anything about elections..." autocomplete="off">
+                        <button class="chat-send-btn" id="chatSendBtn" aria-label="Send message">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="mainFooter">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="logo-icon">🗳️</span>
+                    <span class="logo-text">Electo<span class="logo-accent">Guide</span></span>
+                    <p class="footer-tagline">Empowering citizens through election education.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#overview" id="footerOverview">Overview</a>
+                    <a href="#timeline" id="footerTimeline">Timeline</a>
+                    <a href="#steps" id="footerSteps">Voting Guide</a>
+                    <a href="#quiz" id="footerQuiz">Quiz</a>
+                    <a href="#faq" id="footerFAQ">FAQ</a>
+                    <a href="#assistant" id="footerAssistant">AI Assistant</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ElectoGuide. Built to empower democracy. Powered by Gemini AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <script src="app.js"></script>
+</body>
+</html>
