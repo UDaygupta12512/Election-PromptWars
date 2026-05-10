@@ -6,7 +6,7 @@ const path = require('path');
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
@@ -52,7 +52,7 @@ app.post('/api/chat', async (req, res) => {
 
         res.status(200).json(data);
     } catch (error) {
-        res.status(500).json({ error: { message: error.message } });
+up        res.status(500).json({ error: { message: error.message } });
     }
 });
 
